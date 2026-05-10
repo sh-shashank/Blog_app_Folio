@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Folio — A Journal of Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <button class="nav-btn" id="menu-toggle" title="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <a class="wordmark" href="#" id="home-link">
+        <span class="wordmark-fo">Fo</span><span class="wordmark-lio">lio</span>
+      </a>
+      <div class="nav-right">
+        <button class="nav-btn icon-btn" id="search-toggle" title="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="btn-cta" id="new-post-btn">New Post</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── SEARCH BAR ── -->
+  <div class="search-bar" id="search-bar">
+    <div class="search-inner">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search-input" placeholder="Search articles, authors, topics…"/>
+      <button id="search-close">✕</button>
+    </div>
+  </div>
+
+  <!-- ── SIDE MENU ── -->
+  <div class="menu-overlay" id="menu-overlay"></div>
+  <aside class="side-menu" id="side-menu">
+    <div class="side-menu-header">
+      <span class="side-menu-title">Sections</span>
+      <button id="menu-close">✕</button>
+    </div>
+    <nav class="side-nav">
+      <a class="side-link active" data-category="">All Articles</a>
+      <div id="side-categories"></div>
+    </nav>
+    <div class="side-stats" id="side-stats"></div>
+    <div class="side-footer">
+      <p>Folio is a journal of ideas.<br/>Write with intention.</p>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main" id="main-view">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">A Journal of Ideas</p>
+        <h1 class="hero-headline">Where thought<br/><em>takes its time.</em></h1>
+        <p class="hero-sub">Long-form essays, cultural criticism, and careful reporting — written to be read slowly.</p>
+      </div>
+      <div class="hero-rule"></div>
+    </section>
+
+    <!-- CATEGORY PILLS -->
+    <div class="category-bar">
+      <div class="category-pills" id="category-pills">
+        <button class="pill active" data-category="">All</button>
+      </div>
+    </div>
+
+    <!-- FEATURED POST -->
+    <section class="featured-section" id="featured-section"></section>
+
+    <!-- POST GRID -->
+    <section class="grid-section">
+      <div class="post-grid" id="post-grid"></div>
+      <div class="load-more-wrap" id="load-more-wrap" style="display:none">
+        <button class="btn-load" id="load-more-btn">Load more essays</button>
+      </div>
+      <div class="empty-state" id="empty-state" style="display:none">
+        <p>No articles found.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── SINGLE POST VIEW ── -->
+  <div class="post-view" id="post-view" style="display:none">
+    <div class="post-view-inner">
+      <button class="back-btn" id="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Journal
+      </button>
+      <article class="article" id="article-content"></article>
+    </div>
+  </div>
+
+  <!-- ── EDITOR MODAL ── -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="editor-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">New Post</h2>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <div class="editor-form">
+        <div class="ef-row">
+          <div class="ef-group ef-grow">
+            <label class="ef-label">Title *</label>
+            <input type="text" id="ef-title" class="ef-input" placeholder="Your headline…"/>
+          </div>
+        </div>
+        <div class="ef-row">
+          <div class="ef-group ef-grow">
+            <label class="ef-label">Excerpt</label>
+            <textarea id="ef-excerpt" class="ef-input ef-textarea" rows="2" placeholder="A compelling summary…"></textarea>
+          </div>
+        </div>
+        <div class="ef-row">
+          <div class="ef-group ef-grow">
+            <label class="ef-label">Content</label>
+            <textarea id="ef-content" class="ef-input ef-textarea ef-content-area" rows="8" placeholder="Write your essay…"></textarea>
+          </div>
+        </div>
+        <div class="ef-row ef-row-cols">
+          <div class="ef-group">
+            <label class="ef-label">Category</label>
+            <select id="ef-category" class="ef-input ef-select"></select>
+          </div>
+          <div class="ef-group">
+            <label class="ef-label">Author</label>
+            <input type="text" id="ef-author" class="ef-input" placeholder="Name"/>
+          </div>
+          <div class="ef-group">
+            <label class="ef-label">Cover Colour</label>
+            <input type="color" id="ef-color" class="ef-input ef-color" value="#2c3e50"/>
+          </div>
+          <div class="ef-group">
+            <label class="ef-label">Status</label>
+            <select id="ef-status" class="ef-input ef-select">
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+          </div>
+        </div>
+        <div class="ef-row">
+          <div class="ef-group ef-grow">
+            <label class="ef-label">Tags (comma-separated)</label>
+            <input type="text" id="ef-tags" class="ef-input" placeholder="design, culture, technology"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="modal-cancel">Cancel</button>
+        <button class="btn-cta" id="modal-save">Publish Post</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
