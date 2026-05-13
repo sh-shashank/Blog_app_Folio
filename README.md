@@ -48,13 +48,12 @@ http://localhost:5000
 - ✅ Paginated grid with load-more
 - ✅ Single post reading view
 - ✅ Responsive design
-- ✅ 7 demo posts pre-loaded
 
 ## Fonts Used
 - **Cormorant Garamond** — editorial serif for headlines
 - **Jost** — clean sans-serif for UI
 
-## Production Tips
+## Next Updates 
 - Replace the in-memory `posts = []` list with **SQLite + flask-sqlalchemy**
 - Add a rich text editor (Quill.js, TipTap) for formatted content
 - Add image upload support via **flask-uploads** or S3
